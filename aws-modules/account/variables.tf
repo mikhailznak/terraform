@@ -8,14 +8,8 @@ variable "path" {
 }
 
 variable "s3_policy" {
-  type = list(any)
-  default = [
-    {
-      "actions"   = ["s3:GetObject"]
-      "resources" = ["arn:aws:s3:::*/*"]
-      "effect"    = "Allow"
-    }
-  ]
+  type    = list(any)
+  default = []
 }
 variable "policy_name" {
   type    = string

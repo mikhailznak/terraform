@@ -20,31 +20,10 @@ data "aws_iam_policy_document" "s3_policy" {
       effect    = lookup(statement.value, "effect")
     }
   }
-  #   statement {
-  #     actions   = ["s3:GetObject"]
-  #     resources = ["arn:aws:s3:::*/*"]
-  #     effect = "Allow"
-  #   }
 }
 
 resource "aws_iam_user_policy" "policy" {
-  name = var.policy_name
-  user = aws_iam_user.user.name
-
+  name   = var.policy_name
+  user   = aws_iam_user.user.name
   policy = data.aws_iam_policy_document.s3_policy.json
-
-  #   <<EOF
-  # {
-  #   "Version": "2012-10-17",
-  #   "Statement": [
-  #     {
-  #       "Action": [
-  #         "s3:GetObject"
-  #       ],
-  #       "Effect": "Allow",
-  #       "Resource": ["arn:aws:s3:::*/*"]
-  #     }
-  #   ]
-  # }
-  # EOF
 }
